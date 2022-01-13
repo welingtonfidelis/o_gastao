@@ -1,38 +1,40 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap');
+@import '~antd/dist/antd.css';
+
+* {
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 4px;
+  font-family: "Roboto", sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+textarea,
+input {
+  font-size: 16px;
+  font-family: "Roboto", sans-serif;
+  line-height: 1.4;
+  padding: 4px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+:root {
+  --navgar-mobile-height: 54px;
+  --header-mobile-height: 40px;
+  --navbar-height: 40px;
+  --header-height: 40px;
+
+  --background-color: #fff;
+  --text-1-color: #333;
+  --text-2-color: #fff;
+  --contrast-1-color: #63DBFF;
+  --contrast-2-color: #264653; 
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+@primary-color: red;
