@@ -3,16 +3,19 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   justify-content: center;
-  border-top: 1px solid #f0f0f0;
   width: calc(100% - 24px);
   height: 50px;
   position: fixed;
   bottom: 12px;
+  background: #E5E5E5;
+  border-radius: 4px;
+  padding: 2px;
   
   & ul {
     justify-content: center;
     width: 100%;
     margin-top: 8px;
+    background: #E5E5E5;
 
     li.ant-menu-item {
       & svg {
@@ -21,24 +24,22 @@ export const Container = styled.div`
 
     }
 
-    li.ant-menu-item-selected {
-      color: red;
-    }
-
     span.ant-menu-title-content {
       display: none;
     }
   }
 
   @media (min-width: 800px) {
-    top: 40px;
+    top: 50px;
     border-top: none;
-    border-bottom: 1px solid #f0f0f0;
 
     ul {
       margin-bottom: 8px;
 
       li.ant-menu-item {
+        display: flex;
+        align-items: center;
+
         & svg {
           display: none;
         }

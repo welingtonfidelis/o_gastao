@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap');
-@import '~antd/dist/antd.css';
+@import './antd.css';
 
 * {
   scroll-behavior: smooth;
@@ -14,6 +14,7 @@ html, body, #root {
   margin: 0;
   padding: 4px;
   font-family: "Roboto", sans-serif;
+  background: var(--background-color);
 }
 
 textarea,
@@ -27,14 +28,18 @@ input {
 :root {
   --navgar-mobile-height: 54px;
   --header-mobile-height: 40px;
-  --navbar-height: 40px;
+  --navbar-height: 52px;
   --header-height: 40px;
 
   --background-color: #fff;
   --text-1-color: #333;
   --text-2-color: #fff;
-  --contrast-1-color: #63DBFF;
+  --contrast-1-color: #1890ff;
   --contrast-2-color: #264653; 
+  --success-color: #03A828;
+  --error-color: #f5222d;
 }
 
-@primary-color: red;
+::-webkit-scrollbar {
+  display: none;
+}

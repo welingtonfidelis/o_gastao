@@ -24,7 +24,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "antd:make:css": "npx lessc ./src/styles/main.less ./src/styles/css/antd.css --js"
   },
   "eslintConfig": {
     "extends": [
@@ -45,6 +46,7 @@
     ]
   },
   "devDependencies": {
-    "@types/styled-components": "^5.1.20"
+    "@types/styled-components": "^5.1.20",
+    "less": "^4.1.2"
   }
 }

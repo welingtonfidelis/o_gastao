@@ -2,12 +2,12 @@ import {
   FaRegUserCircle
 } from "react-icons/fa";
 
-import { Container } from "./styled";
+import { Container, TextComponent } from "./styled";
 
 const Header = () => {
   return (
     <Container>
-      Olá, seja bem vindo(a) de volta!
+      <TextComponent>Olá, seja bem vindo(a) de volta!</TextComponent>
       <FaRegUserCircle />
     </Container>
   );

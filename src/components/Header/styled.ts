@@ -9,5 +9,10 @@ export const Container = styled.div`
   & svg {
     font-size: 1.6rem;
     margin-left: 8px;
+    color: var(--contrast-1-color);
   }
 `;
+
+export const TextComponent = styled.span`
+  color: var(--text-1-color);
+`
