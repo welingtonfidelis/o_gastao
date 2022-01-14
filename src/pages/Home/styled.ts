@@ -15,6 +15,8 @@ export const Container = styled.div`
 `;
 
 export const CardListContainer = styled.div`
+  width: 100%;
+
   h3 {
     color: var(--contrast-1-color);
     margin-top: 8px;

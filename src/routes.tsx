@@ -4,21 +4,77 @@ import Navbar from "./components/Navbar";
 import Cars from "./pages/Cars";
 import Home from "./pages/Home";
 import Informations from "./pages/Informations";
+import NewCar from "./pages/NewCar";
 import Reports from "./pages/Reports";
 import Suplies from "./pages/Suplies";
+
+const routeWrapper = (
+  key: string,
+  path: string,
+  element: JSX.Element,
+  renderExtraComponents: boolean
+) => {
+  return (
+    <Route
+      key={key}
+      path={path}
+      element={
+        <>
+          {renderExtraComponents && <Header />}
+          {element}
+          {renderExtraComponents && <Navbar />}
+        </>
+      }
+    />
+  );
+};
+
+const allRoutes = [
+  {
+    path: "/",
+    element: <Home />,
+    renderExtraComponents: true,
+  },
+  {
+    path: "/cars",
+    element: <Cars />,
+    renderExtraComponents: true,
+  },
+  {
+    path: "/suplies",
+    element: <Suplies />,
+    renderExtraComponents: true,
+  },
+  {
+    path: "/reports",
+    element: <Reports />,
+    renderExtraComponents: true,
+  },
+  {
+    path: "/informations",
+    element: <Informations />,
+    renderExtraComponents: true,
+  },
+  {
+    path: "/new-car",
+    element: <NewCar />,
+    renderExtraComponents: false,
+  },
+];
 
 const AppRoutes = () => {
   return (
     <>
-    <Header />
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/cars" element={<Cars />} />
-      <Route path="/suplies" element={<Suplies />} />
-      <Route path="/reports" element={<Reports />} />
-      <Route path="/informations" element={<Informations />} />
-    </Routes>
-    <Navbar />
+      <Routes>
+        {allRoutes.map((item, index) =>
+          routeWrapper(
+            index + "",
+            item.path,
+            item.element,
+            item.renderExtraComponents
+          )
+        )}
+      </Routes>
     </>
   );
 };
