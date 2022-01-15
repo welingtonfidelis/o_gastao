@@ -20,6 +20,11 @@ export const CardListContainer = styled.div`
   h3 {
     color: var(--contrast-1-color);
     margin-top: 8px;
+    flex: 3;
+  }
+
+  button {
+    flex: 1;
   }
 `;
 

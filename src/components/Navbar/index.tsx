@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu } from "antd";
 import {
   FaCarAlt,
@@ -14,6 +14,12 @@ import { useNavigate } from "react-router-dom";
 const Navbar = () => {
   const [selecedOption, setSelectedOption] = useState("/");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const urlPath = window.location.pathname;
+    const [_, page] = urlPath.split('/');
+    setSelectedOption(`/${page}`);
+  }, []);
 
   const navbarOptions = [
     {

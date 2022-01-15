@@ -60,6 +60,11 @@ const allRoutes = [
     element: <NewCar />,
     renderExtraComponents: false,
   },
+  {
+    path: "/edit-car/:id",
+    element: <NewCar />,
+    renderExtraComponents: false,
+  },
 ];
 
 const AppRoutes = () => {

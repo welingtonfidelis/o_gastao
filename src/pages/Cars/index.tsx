@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PrimaryButton } from "../../components/Button";
 import ItemCard from "../../components/ItemCard";
-import Modal from "../../components/Modal";
 import {
   CardListContainer,
   CardListHeader,
@@ -11,7 +10,6 @@ import {
 } from "./styled";
 
 const Cars = () => {
-  const [openModal, setOpenModal] = useState(false);
   const navigate = useNavigate();
 
   const cars = [
@@ -25,26 +23,19 @@ const Cars = () => {
     },
   ];
 
-  const handleEditCar = (id: number) => {
-    console.log("edit car", id);
-  };
-
   const handleDeleteCar = (id: number) => {
     console.log("delete car", id);
   };
 
-  const handleNewCar = (id?: number) => {
-    // setOpenModal(true);
-    navigate('/new-car');
-  }
+  const handleNewCar = () => {
+    navigate("/new-car");
+  };
 
-  const handleSaveCar = () => {
-    console.log('save');
-    
-    setOpenModal(false);
-  }
+  const handleEditCar = (id: number) => {
+    navigate(`/edit-car/${id}`);
+  };
+
   return (
-    <>
     <Container>
       <CardListContainer>
         <CardListHeader>
@@ -70,11 +61,6 @@ const Cars = () => {
         </CardListItems>
       </CardListContainer>
     </Container>
-    
-    <Modal visible={openModal} onOk={handleSaveCar} onCancel={() => setOpenModal(false)}>
-      <h2>New car</h2>
-    </Modal>
-    </>
   );
 };
 
