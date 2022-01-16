@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PrimaryButton } from "../../components/Button";
 import ItemCard from "../../components/ItemCard";
+import { CarInterface } from "../../interface/car";
+import { listCar } from "../../services/requests";
 import {
   CardListContainer,
   CardListHeader,
@@ -10,18 +12,18 @@ import {
 } from "./styled";
 
 const Cars = () => {
+  const [cars, setCars] = useState<CarInterface[]>([]);
   const navigate = useNavigate();
 
-  const cars = [
-    {
-      id: 1,
-      name: "Gol Vermelho",
-    },
-    {
-      id: 2,
-      name: "Cg 150",
-    },
-  ];
+  useEffect(() => {
+    console.log('list');
+    getListCars();
+  }, []);
+
+  const getListCars = async () => {
+    const list = await listCar();
+    if(list) setCars(list);
+  }
 
   const handleDeleteCar = (id: number) => {
     console.log("delete car", id);
