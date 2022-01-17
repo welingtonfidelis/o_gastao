@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
+
 import { PrimaryButton } from "../../components/Button";
 import ItemCard from "../../components/ItemCard";
 import { CarInterface } from "../../interface/car";
@@ -13,10 +15,10 @@ import {
 
 const Cars = () => {
   const [cars, setCars] = useState<CarInterface[]>([]);
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log('list');
     getListCars();
   }, []);
 
@@ -41,8 +43,8 @@ const Cars = () => {
     <Container>
       <CardListContainer>
         <CardListHeader>
-          <h3>Seus veículos cadastrados</h3>
-          <PrimaryButton onClick={() => handleNewCar()}>Novo</PrimaryButton>
+          <h3>{t('pages.cars.your_vehicles')}</h3>
+          <PrimaryButton onClick={() => handleNewCar()}>{t('general.button_new')}</PrimaryButton>
         </CardListHeader>
 
         <CardListItems>

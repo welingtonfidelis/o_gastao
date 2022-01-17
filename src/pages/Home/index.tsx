@@ -1,4 +1,6 @@
 import ItemCard from "../../components/ItemCard";
+import { useTranslation } from 'react-i18next';
+
 import { maskDate, maskValue } from "../../util";
 import {
   CardListContainer,
@@ -8,6 +10,8 @@ import {
 } from "./styled";
 
 const Home = () => {
+  const { t } = useTranslation();
+
   const openSuplies = [
     {
       id: 99,
@@ -61,7 +65,7 @@ const Home = () => {
   return (
     <Container>
       <CardListContainer>
-        <h3>Abastecimentos em aberto</h3>
+        <h3>{t('pages.home.open_supplies')}</h3>
 
         <CardListItems>
           {openSuplies.map((item, index) => {
@@ -87,7 +91,7 @@ const Home = () => {
       </CardListContainer>
 
       <CardListContainer>
-        <h3>Últimos abastecimenos</h3>
+        <h3>{t('pages.home.last_supplies')}</h3>
 
         <CardListItems>
           {lastSuplies.map((item, index) => {

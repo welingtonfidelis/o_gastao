@@ -37,12 +37,12 @@ const allRoutes = [
     renderExtraComponents: true,
   },
   {
-    path: "/cars",
+    path: "/vehicles",
     element: <Cars />,
     renderExtraComponents: true,
   },
   {
-    path: "/suplies",
+    path: "/supplies",
     element: <Suplies />,
     renderExtraComponents: true,
   },

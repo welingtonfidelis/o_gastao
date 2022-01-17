@@ -7,6 +7,7 @@ import {
   FaChartLine,
   FaInfo,
 } from "react-icons/fa";
+import { useTranslation } from 'react-i18next';
 
 import { Container } from "./styled";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 const Navbar = () => {
   const [selecedOption, setSelectedOption] = useState("/");
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const urlPath = window.location.pathname;
@@ -23,27 +25,27 @@ const Navbar = () => {
 
   const navbarOptions = [
     {
-      name: "Abastecimentos",
-      value: "/suplies",
+      name: t('navbar.options.supplies'),
+      value: "/supplies",
       icon: <FaGasPump />,
     },
     {
-      name: "Veículos",
-      value: "/cars",
+      name: t('navbar.options.vehicles'),
+      value: "/vehicles",
       icon: <FaCarAlt />,
     },
     {
-      name: "Home",
+      name: t('navbar.options.home'),
       value: "/",
       icon: <FaHome />,
     },
     {
-      name: "Relatórios",
+      name: t('navbar.options.reports'),
       value: "/reports",
       icon: <FaChartLine />,
     },
     {
-      name: "Informações",
+      name: t('navbar.options.informations'),
       value: "/informations",
       icon: <FaInfo />,
     },

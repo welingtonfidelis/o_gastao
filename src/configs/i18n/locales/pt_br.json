@@ -1,0 +1,36 @@
+{
+  "general": {
+    "button_new": "Novo",
+    "message_success": "Sucesso ao executar sua requisição!",
+    "message_error": "Houve um erro ao executar sua requisição. Por favor, tente novamente."
+  },
+  "user": {
+    "welcome_message": "Olá, seja bem vindo(a) de volta!"
+  },
+  "navbar": {
+    "options": {
+      "supplies": "Abastecimentos",
+      "vehicles": "Veículos",
+      "home": "Home",
+      "reports": "Relatórios",
+      "informations": "Informações"
+    }
+  },
+  "pages": {
+    "home": {
+      "open_supplies": "Abastecimentos em aberto",
+      "last_supplies": "Últimos abastecimentos"
+    },
+    "cars": {
+      "your_vehicles": "Seus veículos cadastrados"
+    },
+    "new_car": {
+      "title_new_car": "Cadastrar Novo Veículo",
+      "title_edit_car": "Editar veículo",
+      "placeholder_name": "Nome",
+      "error_input_message_name": "Por favor, insira um nome.",
+      "message_success": "Salvo com sucesso!",
+      "message_error": "Houve um erro ao tentar salvar. Por favor, tente novamente."
+    }
+  }
+}

@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useTranslation } from 'react-i18next';
 import {
   FaRegUserCircle
 } from "react-icons/fa";
@@ -6,6 +7,8 @@ import {
 import { Container, TextComponent } from "./styled";
 
 const Header = () => {
+  const { t } = useTranslation();
+
   useEffect(() => {
     console.log('Header Component');
     
@@ -13,7 +16,7 @@ const Header = () => {
 
   return (
     <Container>
-      <TextComponent>Olá, seja bem vindo(a) de volta!</TextComponent>
+      <TextComponent>{t('user.welcome_message')}</TextComponent>
       <FaRegUserCircle />
     </Container>
   );
