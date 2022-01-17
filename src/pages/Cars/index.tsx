@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next';
 
 import { PrimaryButton } from "../../components/Button";
 import ItemCard from "../../components/ItemCard";
-import { CarInterface } from "../../interface/car";
-import { listCar } from "../../services/requests";
+import { Car } from "../../interface/car";
+import { deleteCar, listCar } from "../../services/requests";
 import {
   CardListContainer,
   CardListHeader,
@@ -14,7 +14,7 @@ import {
 } from "./styled";
 
 const Cars = () => {
-  const [cars, setCars] = useState<CarInterface[]>([]);
+  const [cars, setCars] = useState<Car[]>([]);
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -27,8 +27,10 @@ const Cars = () => {
     if(list) setCars(list);
   }
 
-  const handleDeleteCar = (id: number) => {
-    console.log("delete car", id);
+  const handleDeleteCar = async (id: number) => {
+    await deleteCar(id);
+
+    getListCars();
   };
 
   const handleNewCar = () => {
@@ -54,10 +56,10 @@ const Cars = () => {
                 key={index}
                 title={item.name}
                 editAction={() => {
-                  handleEditCar(item.id);
+                  handleEditCar(item.id!);
                 }}
                 deleteAction={() => {
-                  handleDeleteCar(item.id);
+                  handleDeleteCar(item.id!);
                 }}
               ></ItemCard>
             );

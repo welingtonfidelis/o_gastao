@@ -2,7 +2,10 @@
   "general": {
     "button_new": "Novo",
     "message_success": "Sucesso ao executar sua requisição!",
-    "message_error": "Houve um erro ao executar sua requisição. Por favor, tente novamente."
+    "message_error": "Houve um erro ao executar sua requisição. Por favor, tente novamente.",
+    "delete_confirm_title": "Deseja excluir este dado?",
+    "delete_confirm_yes": "SIM",
+    "delete_confirm_no": "NÃO"
   },
   "user": {
     "welcome_message": "Olá, seja bem vindo(a) de volta!"
@@ -28,9 +31,7 @@
       "title_new_car": "Cadastrar Novo Veículo",
       "title_edit_car": "Editar veículo",
       "placeholder_name": "Nome",
-      "error_input_message_name": "Por favor, insira um nome.",
-      "message_success": "Salvo com sucesso!",
-      "message_error": "Houve um erro ao tentar salvar. Por favor, tente novamente."
+      "error_input_message_name": "Por favor, insira um nome."
     }
   }
 }

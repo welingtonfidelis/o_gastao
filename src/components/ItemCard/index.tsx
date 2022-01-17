@@ -1,4 +1,5 @@
-import { ReactElement } from "react";
+import { Popconfirm } from "antd";
+import { useTranslation } from "react-i18next";
 import { FaPencilAlt, FaTrashAlt } from "react-icons/fa";
 
 import {
@@ -20,13 +21,25 @@ const ItemCard: React.FC<Props> = ({
   deleteAction,
   children,
 }) => {
+  const { t } = useTranslation();
+
   return (
     <Container>
       <TitleComponent>
         <span>{title}</span>
         <ActionComponent>
           {editAction && <FaPencilAlt id="edit" onClick={editAction} />}
-          {deleteAction && <FaTrashAlt id="delete" onClick={deleteAction} />}
+          {deleteAction && (
+            <Popconfirm
+              placement="bottomRight"
+              title={t("general.delete_confirm_title")}
+              onConfirm={deleteAction}
+              okText={t("general.delete_confirm_yes")}
+              cancelText={t("general.delete_confirm_no")}
+            >
+              <FaTrashAlt id="delete" />
+            </Popconfirm>
+          )}
         </ActionComponent>
       </TitleComponent>
       {children && <ChildrenComponent>{children}</ChildrenComponent>}

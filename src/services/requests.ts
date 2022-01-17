@@ -1,38 +1,69 @@
 import { toast } from "react-toastify";
-import i18n from 'i18next';
+import i18n from "i18next";
 
-import { NewCarInterface } from "../interface/car";
-import { addCar, listCars } from "./repositories/cars";
+import { Car } from "../interface/car";
+import { carDB } from "./repositories/cars";
 
-
-const executeRequest = async (
-  request: (data?: any) => any,
-  data?: any,
-  successMessage?: string,
-  errorMessage?: string
-  ) => {
+export const listCar = async () => {
   try {
-    const response = await request(data);
-
-    if (successMessage) toast.success("Salvo com sucesso", { autoClose: 7000 });
-
+    const response = await carDB.findAll();
     return response;
   } catch (error) {
-    const message = errorMessage || i18n.t('general.message_error');
-    console.log(message, error);
+    const message = i18n.t("general.message_error");
     toast.error(message, { autoClose: false });
+    console.log(message, error);
   }
 };
 
-export const listCar = () => {
-  return executeRequest(listCars);
+export const findCarById = async (id: number) => {
+  try {
+    const response = await carDB.findById(id);
+    return response;
+  } catch (error) {
+    const message = i18n.t("general.message_error");
+    toast.error(message, { autoClose: false });
+    console.log(message, error);
+  }
 };
 
-export const saveNewCar = (data: NewCarInterface) => {
-  return executeRequest(
-    addCar,
-    data,
-    i18n.t('pages.new_car.message_success'),
-    i18n.t('pages.new_car.message_error'),
-  );
+export const addCar = (data: Car) => {
+  try {
+    const response = carDB.add(data);
+
+    toast.success(i18n.t('general.message_success'));
+
+    return response;
+  } catch (error) {
+    const message = i18n.t("general.message_error");
+    toast.error(message, { autoClose: false });
+    console.log(message, error);
+  }
+};
+
+export const updateCar = (data: Car) => {
+  try {
+    const response = carDB.update(data);
+
+    toast.success(i18n.t('general.message_success'));
+
+    return response;
+  } catch (error) {
+    const message = i18n.t("general.message_error");
+    toast.error(message, { autoClose: false });
+    console.log(message, error);
+  }
+};
+
+export const deleteCar = (id: number) => {
+  try {
+    const response = carDB.delete(id);
+
+    toast.success(i18n.t('general.message_success'));
+
+    return response;
+  } catch (error) {
+    const message = i18n.t("general.message_error");
+    toast.error(message, { autoClose: false });
+    console.log(message, error);
+  }
 };

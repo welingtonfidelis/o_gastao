@@ -1,23 +1,32 @@
-import { CarInterface, NewCarInterface } from "../../interface/car";
+import { Car } from "../../interface/car";
+import { localDB, DB } from "./db";
 
-const carsList: CarInterface[] = [
-  {
-    id: 1,
-    name: 'Gol Vermelho'
-  }
-]
+class CarDB {
+  db: DB;
 
-export const listCars = async (): Promise<CarInterface[]> => {
-  return carsList;
-}
-
-export const addCar = async (data: NewCarInterface): Promise<CarInterface> => {
-  const newCar = {
-    id: carsList.length + 1,
-    ...data
+  constructor() {
+    this.db = localDB;
   }
 
-  carsList.push(newCar);
+  findAll() {
+    return this.db.cars.toArray()
+  }
 
-  return newCar;
+  findById(id: number) {
+    return this.db.cars.where('id').equals(id).toArray();
+  }
+
+  add(data: Car) {
+    return this.db.cars.add(data); 
+  }
+
+  update(data: Car) {
+    return this.db.cars.update(data.id!, data);
+  }
+
+  delete(id: number) {
+    return this.db.cars.delete(id);
+  }
 }
+
+export const carDB = new CarDB();

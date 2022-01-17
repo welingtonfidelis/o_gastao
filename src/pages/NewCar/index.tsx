@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 
 import { InputText } from "../../components/Button/Input";
 import EditItemPage from "../../components/EditeItemPage";
-import { saveNewCar } from "../../services/requests";
+import { findCarById, addCar, updateCar } from "../../services/requests";
 import { Container } from "./styled";
 
 const NewCar = () => {
@@ -18,25 +18,33 @@ const NewCar = () => {
   useEffect(() => {
     setPageTitle(t('pages.new_car.title_new_car'));
 
-    if (id) setPageTitle(t('pages.new_car.title_edit_car'));
+    if (id) {
+      setPageTitle(t('pages.new_car.title_edit_car'));
+      getCarById();
+    }
   }, [id, t]);
 
   const handleSave = async (e: any) => {
     let response: any;
     if(id) {
-      console.log("atualizando", id, e);
+      response = await updateCar({ id: +id, ...e });
     }
     else {
-      response = await saveNewCar(e);
+      response = await addCar(e);
     }
 
+    
     if(response) navigate(-1);
   };
+  
+  const getCarById = async () => {
+    const [selected] = (await findCarById(+id!)) || [];
 
-  const test = [];
-  for (let i = 0; i <= 5; i += 1) {
-    test.push(i);
+    if(selected) {
+      form.setFieldsValue(selected);
+    }
   }
+
   return (
     <Container>
       <EditItemPage title={pageTitle} onSave={() => form.submit()}>

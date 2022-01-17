@@ -16,10 +16,11 @@ export const Container = styled.div`
 
 export const CardListContainer = styled.div`
   width: 100%;
+  margin-top: 12px;
 
   h3 {
     color: var(--contrast-1-color);
-    margin-top: 8px;
+    margin-bottom: 0;
     flex: 3;
   }
 
@@ -32,7 +33,7 @@ export const CardListHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 4px;
+  margin-bottom: 16px;
 `;
 
 export const CardListItems = styled.div`
