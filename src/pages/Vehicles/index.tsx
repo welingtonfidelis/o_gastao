@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next';
 
 import { PrimaryButton } from "../../components/Button";
 import ItemCard from "../../components/ItemCard";
-import { Car } from "../../interface/car";
-import { deleteCar, listCar } from "../../services/requests";
+import { Vehicle } from "../../interface/vehicle";
+import { listVehicles, deleteVehicle } from "../../services/requests";
 import {
   CardListContainer,
   CardListHeader,
@@ -13,40 +13,40 @@ import {
   Container,
 } from "./styled";
 
-const Cars = () => {
-  const [cars, setCars] = useState<Car[]>([]);
+const Vehicles = () => {
+  const [cars, setVehicles] = useState<Vehicle[]>([]);
   const { t } = useTranslation();
   const navigate = useNavigate();
 
   useEffect(() => {
-    getListCars();
+    getListVehicles();
   }, []);
 
-  const getListCars = async () => {
-    const list = await listCar();
-    if(list) setCars(list);
+  const getListVehicles = async () => {
+    const list = await listVehicles();
+    if(list) setVehicles(list);
   }
 
-  const handleDeleteCar = async (id: number) => {
-    await deleteCar(id);
+  const handleDeleteVehicle = async (id: number) => {
+    await deleteVehicle(id);
 
-    getListCars();
+    getListVehicles();
   };
 
-  const handleNewCar = () => {
-    navigate("/new-car");
+  const handleNewVehicle = () => {
+    navigate("/new-vehicle");
   };
 
-  const handleEditCar = (id: number) => {
-    navigate(`/edit-car/${id}`);
+  const handleEditVehicle = (id: number) => {
+    navigate(`/edit-vehicle/${id}`);
   };
 
   return (
     <Container>
       <CardListContainer>
         <CardListHeader>
-          <h3>{t('pages.cars.your_vehicles')}</h3>
-          <PrimaryButton onClick={() => handleNewCar()}>{t('general.button_new')}</PrimaryButton>
+          <h3>{t('pages.vehicles.title_vehicles')}</h3>
+          <PrimaryButton onClick={() => handleNewVehicle()}>{t('general.button_new')}</PrimaryButton>
         </CardListHeader>
 
         <CardListItems>
@@ -56,10 +56,10 @@ const Cars = () => {
                 key={index}
                 title={item.name}
                 editAction={() => {
-                  handleEditCar(item.id!);
+                  handleEditVehicle(item.id!);
                 }}
                 deleteAction={() => {
-                  handleDeleteCar(item.id!);
+                  handleDeleteVehicle(item.id!);
                 }}
               ></ItemCard>
             );
@@ -70,4 +70,4 @@ const Cars = () => {
   );
 };
 
-export default Cars;
+export default Vehicles;

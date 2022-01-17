@@ -24,14 +24,32 @@
       "open_supplies": "Abastecimentos em aberto",
       "last_supplies": "Últimos abastecimentos"
     },
-    "cars": {
-      "your_vehicles": "Seus veículos cadastrados"
+    "vehicles": {
+      "title_vehicles": "Seus veículos cadastrados"
     },
-    "new_car": {
-      "title_new_car": "Cadastrar Novo Veículo",
-      "title_edit_car": "Editar veículo",
+    "new_vehicle": {
+      "title_new_vehicle": "Cadastrar Novo Veículo",
+      "title_edit_vehicle": "Editar Veículo",
       "placeholder_name": "Nome",
       "error_input_message_name": "Por favor, insira um nome."
+    },
+    "supplies": {
+      "title_supplies": "Seus abastecimentos cadastrados"
+    },
+    "new_supply": {
+      "title_new_supply": "Cadastrar Novo Abastecimento",
+      "title_edit_supply": "Editar Abastecimento",
+      "placeholder_vehicle": "Veículo",
+      "error_input_message_vehicle": "Por favor, escolha um veículo.",
+      "placeholder_date": "Data",
+      "error_input_message_date": "Por favor, escolha uma data.",
+      "placeholder_value": "Valor",
+      "error_input_message_value": "Por favor, insira um valor.",
+      "placeholder_fuel": "Combustível",
+      "error_input_message_fuel": "Por favor, escolha um combustível.",
+      "placeholder_liters": "Qntd. de Litros",
+      "error_input_message_liters": "Por favor, insira uma quantidade de litros.",
+      "placeholder_km": "Km's rodados"
     }
   }
 }

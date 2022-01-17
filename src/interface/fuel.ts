@@ -1,4 +1,4 @@
-export interface Car {
+export interface Fuel {
   id?: number;
   name: string;
 }

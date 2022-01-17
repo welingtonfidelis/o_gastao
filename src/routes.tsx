@@ -2,12 +2,13 @@ import { Routes, Route } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
-import Cars from "./pages/Cars";
+import Vehicles from "./pages/Vehicles";
 import Home from "./pages/Home";
 import Informations from "./pages/Informations";
-import NewCar from "./pages/NewCar";
+import NewVehicle from "./pages/NewVehicle";
 import Reports from "./pages/Reports";
 import Suplies from "./pages/Suplies";
+import NewSupply from "./pages/NewSupply";
 
 const routeWrapper = (
   key: string,
@@ -38,7 +39,7 @@ const allRoutes = [
   },
   {
     path: "/vehicles",
-    element: <Cars />,
+    element: <Vehicles />,
     renderExtraComponents: true,
   },
   {
@@ -57,13 +58,23 @@ const allRoutes = [
     renderExtraComponents: true,
   },
   {
-    path: "/new-car",
-    element: <NewCar />,
+    path: "/new-vehicle",
+    element: <NewVehicle />,
     renderExtraComponents: false,
   },
   {
-    path: "/edit-car/:id",
-    element: <NewCar />,
+    path: "/edit-vehicle/:id",
+    element: <NewVehicle />,
+    renderExtraComponents: false,
+  },
+  {
+    path: "/new-supply",
+    element: <NewSupply />,
+    renderExtraComponents: false,
+  },
+  {
+    path: "/edit-supply/:id",
+    element: <NewSupply />,
     renderExtraComponents: false,
   },
 ];

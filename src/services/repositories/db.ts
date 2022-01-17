@@ -1,13 +1,19 @@
 import Dexie, { Table } from 'dexie';
-import { Car } from '../../interface/car';
+import { Vehicle } from '../../interface/vehicle';
+import { Fuel } from '../../interface/fuel';
+import { Supply } from '../../interface/supply';
 
 export class DB extends Dexie {
-  cars!: Table<Car>; 
+  fuels!: Table<Fuel>; 
+  vehicles!: Table<Vehicle>;
+  supplies!: Table<Supply>;
 
   constructor() {
     super('o_gastao_db');
     this.version(1).stores({
-      cars: '++id, name'
+      fuels: '++id, name',
+      vehicles: '++id, name',
+      supplies: '++id, vehicle_id, fuel_id',
     });
   }
 }

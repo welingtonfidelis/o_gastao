@@ -3,12 +3,12 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next'
 
-import { InputText } from "../../components/Button/Input";
+import { InputText } from "../../components/Input";
 import EditItemPage from "../../components/EditeItemPage";
-import { findCarById, addCar, updateCar } from "../../services/requests";
+import { findCarById, addVehicle, updateVehicle } from "../../services/requests";
 import { Container } from "./styled";
 
-const NewCar = () => {
+const NewVehicle = () => {
   const { t } = useTranslation();
   const [pageTitle, setPageTitle] = useState('');
   const [form] = Form.useForm();
@@ -16,10 +16,10 @@ const NewCar = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    setPageTitle(t('pages.new_car.title_new_car'));
+    setPageTitle(t('pages.new_vehicle.title_new_vehicle'));
 
     if (id) {
-      setPageTitle(t('pages.new_car.title_edit_car'));
+      setPageTitle(t('pages.new_vehicle.title_edit_vehicle'));
       getCarById();
     }
   }, [id, t]);
@@ -27,10 +27,10 @@ const NewCar = () => {
   const handleSave = async (e: any) => {
     let response: any;
     if(id) {
-      response = await updateCar({ id: +id, ...e });
+      response = await updateVehicle({ id: +id, ...e });
     }
     else {
-      response = await addCar(e);
+      response = await addVehicle(e);
     }
 
     
@@ -54,11 +54,11 @@ const NewCar = () => {
             rules={[
               {
                 required: true,
-                message: t('pages.new_car.error_input_message_name'),
+                message: t('pages.new_vehicle.error_input_message_name'),
               },
             ]}
           >
-            <InputText placeholder={t('pages.new_car.placeholder_name')} />
+            <InputText placeholder={t('pages.new_vehicle.placeholder_name')} />
           </Form.Item>
         </Form>
       </EditItemPage>
@@ -66,4 +66,4 @@ const NewCar = () => {
   );
 };
 
-export default NewCar;
+export default NewVehicle;
