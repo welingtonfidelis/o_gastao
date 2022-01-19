@@ -1,4 +1,4 @@
-import { Supply } from "../../interface/supply";
+import { Supply, SupplyWithRelations } from "../../interface/supply";
 import { localDB, DB } from "./db";
 
 class SupplyDB {
@@ -8,8 +8,23 @@ class SupplyDB {
     this.db = localDB;
   }
 
-  findAll() {
-    return this.db.supplies.toArray()
+  async findAll(): Promise<SupplyWithRelations[]> {
+    const supplies: Supply[] = await this.db.supplies.toArray();
+
+    const suppliesWithRelations = [];
+    for(let i = 0; i < supplies.length; i += 1) {
+      const item = supplies[i];
+      const [vehicle] = await this.db.vehicles.where('id').equals(item.vehicle_id).toArray();
+      const [fuel] = await this.db.fuels.where('id').equals(item.fuel_id).toArray();
+
+      suppliesWithRelations.push({
+        ...item,
+        vehicle,
+        fuel
+      })
+    }
+
+    return suppliesWithRelations;
   }
 
   findById(id: number) {

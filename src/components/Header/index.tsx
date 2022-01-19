@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useTranslation } from 'react-i18next';
 import {
   FaRegUserCircle
@@ -8,11 +7,6 @@ import { Container, TextComponent } from "./styled";
 
 const Header = () => {
   const { t } = useTranslation();
-
-  useEffect(() => {
-    console.log('Header Component');
-    
-  }, []);
 
   return (
     <Container>

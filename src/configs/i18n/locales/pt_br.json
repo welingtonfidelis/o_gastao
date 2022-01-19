@@ -34,7 +34,14 @@
       "error_input_message_name": "Por favor, insira um nome."
     },
     "supplies": {
-      "title_supplies": "Seus abastecimentos cadastrados"
+      "title_supplies": "Seus abastecimentos cadastrados",
+      "liters": "litros",
+      "km_driven": "Km's rodados",
+      "average_km_driven": "km/l de média",
+      "open_supply": "Não finalizado",
+      "fuel_gasoline": "de gasolina",
+      "fuel_alcohol": "de álcool",
+      "fuel_diesel": "de díesel"
     },
     "new_supply": {
       "title_new_supply": "Cadastrar Novo Abastecimento",

@@ -1,20 +1,26 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 import { PrimaryButton } from "../../components/Button";
 import ItemCard from "../../components/ItemCard";
 import { listSupplies, deleteSupply } from "../../services/requests";
 import {
+  CardItemDetails,
+  CardItemLeftDetail,
+  CardItemRightDetail,
   CardListContainer,
   CardListHeader,
   CardListItems,
   Container,
+  KmDriven,
+  KmDrivenOpen,
 } from "./styled";
-import { Supply } from "../../interface/supply";
+import { SupplyWithRelations } from "../../interface/supply";
+import { maskDate, maskValue } from "../../util";
 
 const Supplies = () => {
-  const [cars, setVehicles] = useState<Supply[]>([]);
+  const [supplies, setSupplies] = useState<SupplyWithRelations[]>([]);
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -24,8 +30,9 @@ const Supplies = () => {
 
   const getListSupplies = async () => {
     const list = await listSupplies();
-    if(list) setVehicles(list);
-  }
+
+    if (list && list.length) setSupplies(list);
+  };
 
   const handleDeleteVehicle = async (id: number) => {
     await deleteSupply(id);
@@ -45,23 +52,52 @@ const Supplies = () => {
     <Container>
       <CardListContainer>
         <CardListHeader>
-          <h3>{t('pages.supplies.title_supplies')}</h3>
-          <PrimaryButton onClick={() => handleNewVehicle()}>{t('general.button_new')}</PrimaryButton>
+          <h3>{t("pages.supplies.title_supplies")}</h3>
+          <PrimaryButton onClick={() => handleNewVehicle()}>
+            {t("general.button_new")}
+          </PrimaryButton>
         </CardListHeader>
 
         <CardListItems>
-          {cars.map((item, index) => {
+          {supplies.map((item, index) => {
             return (
               <ItemCard
                 key={index}
-                title={item.date + ''}
+                title={item?.vehicle?.name}
                 editAction={() => {
                   handleEditVehicle(item.id!);
                 }}
                 deleteAction={() => {
                   handleDeleteVehicle(item.id!);
                 }}
-              ></ItemCard>
+              >
+                <CardItemDetails>
+                  <CardItemLeftDetail>
+                    <span>{maskDate(new Date(item.date))}</span>
+                    <span>{maskValue(item.value)}</span>
+                    <span>
+                      {item.liters} {t("pages.supplies.liters")}{" "}
+                      {t(`pages.supplies.fuel_${item.fuel.name}`)}
+                    </span>
+                  </CardItemLeftDetail>
+
+                  <CardItemRightDetail>
+                    <span>
+                      {item.km_driven ? item.km_driven : 0}{" "}
+                      {t("pages.supplies.km_driven")}
+                    </span>
+                    {item.km_driven ? (
+                      <KmDriven>
+                        {item.km_driven} {t("pages.supplies.average_km_driven")}
+                      </KmDriven>
+                    ) : (
+                      <KmDrivenOpen>
+                        {t("pages.supplies.open_supply")}
+                      </KmDrivenOpen>
+                    )}
+                  </CardItemRightDetail>
+                </CardItemDetails>
+              </ItemCard>
             );
           })}
         </CardListItems>

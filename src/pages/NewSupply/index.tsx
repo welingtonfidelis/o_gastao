@@ -6,17 +6,16 @@ import { useTranslation } from "react-i18next";
 import { InputText } from "../../components/Input";
 import EditItemPage from "../../components/EditeItemPage";
 import {
-  addVehicle,
-  updateVehicle,
   findSupplyById,
   listVehicles,
   listFuels,
+  updateSupply,
+  addSupply,
 } from "../../services/requests";
 import { Container } from "./styled";
-import { Vehicle } from "../../interface/vehicle";
-import { Fuel } from "../../interface/fuel";
 import { Select } from "../../components/Select";
 import { DatePicker } from "../../components/DatePicker";
+import moment from "moment";
 
 const NewSupply = () => {
   const { t } = useTranslation();
@@ -39,25 +38,23 @@ const NewSupply = () => {
   }, [id, t]);
 
   const handleSave = async (e: any) => {
-    console.log("!", e);
+    e.date = moment(e.date).format('YYYY/MM/DD hh:mm:ss');
 
-    // let response: any;
-    // if(id) {
-    //   response = await updateVehicle({ id: +id, ...e });
-    // }
-    // else {
-    //   response = await addVehicle(e);
-    // }
+    let response: any;
+    if(id) {
+      response = await updateSupply({ id: +id, ...e });
+    }
+    else {
+      response = await addSupply(e);
+    }
 
-    // if(response) navigate(-1);
+    if(response) navigate(-1);
   };
 
   const getListVehicles = async () => {
     const vehicles = await listVehicles();
 
     if (vehicles) {
-      console.log("vehicles", vehicles);
-
       setVehiclesList(
         vehicles.map((item) => ({ value: item.id, label: item.name }))
       );
@@ -68,8 +65,6 @@ const NewSupply = () => {
     const fuels = await listFuels();
 
     if (fuels) {
-      console.log("fuels", fuels);
-
       setFuelsList(fuels.map((item) => ({ value: item.id, label: item.name })));
     }
   };
@@ -78,7 +73,8 @@ const NewSupply = () => {
     const [selected] = (await findSupplyById(+id!)) || [];
 
     if (selected) {
-      form.setFieldsValue(selected);
+      const date = moment(selected.date);
+      form.setFieldsValue({ ...selected, date });
     }
   };
 
@@ -86,23 +82,6 @@ const NewSupply = () => {
     <Container>
       <EditItemPage title={pageTitle} onSave={() => form.submit()}>
         <Form form={form} onFinish={handleSave}>
-          <Form.Item
-            name="liters"
-            rules={[
-              {
-                required: true,
-                message: t("pages.new_supply.error_input_message_liters"),
-              },
-            ]}
-          >
-            <InputText placeholder={t("pages.new_supply.placeholder_liters")} type="number" />
-          </Form.Item>
-          <Form.Item
-            name="km_driven"
-            rules={[]}
-          >
-            <InputText placeholder={t("pages.new_supply.placeholder_km")} type="number" />
-          </Form.Item>
           <Form.Item
             name="vehicle_id"
             rules={[
@@ -112,7 +91,10 @@ const NewSupply = () => {
               },
             ]}
           >
-            <Select options={vehiclesList} placeholder={t("pages.new_supply.placeholder_vehicle")} />
+            <Select
+              options={vehiclesList}
+              placeholder={t("pages.new_supply.placeholder_vehicle")}
+            />
           </Form.Item>
           <Form.Item
             name="date"
@@ -125,6 +107,12 @@ const NewSupply = () => {
           >
             <DatePicker placeholder={t("pages.new_supply.placeholder_date")} />
           </Form.Item>
+          <Form.Item name="value" rules={[]}>
+            <InputText
+              placeholder={t("pages.new_supply.placeholder_value")}
+              type="number"
+            />
+          </Form.Item>
           <Form.Item
             name="fuel_id"
             rules={[
@@ -134,7 +122,30 @@ const NewSupply = () => {
               },
             ]}
           >
-            <Select options={fuelsList} placeholder={t("pages.new_supply.placeholder_fuel")} />
+            <Select
+              options={fuelsList}
+              placeholder={t("pages.new_supply.placeholder_fuel")}
+            />
+          </Form.Item>
+          <Form.Item
+            name="liters"
+            rules={[
+              {
+                required: true,
+                message: t("pages.new_supply.error_input_message_liters"),
+              },
+            ]}
+          >
+            <InputText
+              placeholder={t("pages.new_supply.placeholder_liters")}
+              type="number"
+            />
+          </Form.Item>
+          <Form.Item name="km_driven" rules={[]}>
+            <InputText
+              placeholder={t("pages.new_supply.placeholder_km")}
+              type="number"
+            />
           </Form.Item>
         </Form>
       </EditItemPage>

@@ -22,6 +22,7 @@ export const CardListContainer = styled.div`
     color: var(--contrast-1-color);
     margin-bottom: 0;
     flex: 3;
+    max-width: 65%;
   }
 
   button {
@@ -40,4 +41,32 @@ export const CardListItems = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-gap: 1rem;
+`;
+
+export const CardItemDetails = styled.div`
+  display: flex;
+  justify-content: space-between;
+  
+  span {
+    margin: 4px 0;
+  }
+`;
+
+export const CardItemLeftDetail = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const CardItemRightDetail = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const KmDriven = styled.span`
+  font-weight: 700;
+`;
+
+export const KmDrivenOpen = styled.span`
+  font-weight: 700;
+  color: var(--error-color);
 `;
