@@ -29,7 +29,7 @@ const Supplies = () => {
   }, []);
 
   const getListSupplies = async () => {
-    const list = await listSupplies();
+    const list = await listSupplies({ orderBy: 'date' });
 
     if (list && list.length) setSupplies(list);
   };
@@ -73,7 +73,7 @@ const Supplies = () => {
               >
                 <CardItemDetails>
                   <CardItemLeftDetail>
-                    <span>{maskDate(new Date(item.date))}</span>
+                    <span>{maskDate(new Date(item.date * 1000))}</span>
                     <span>{maskValue(item.value)}</span>
                     <span>
                       {item.liters} {t("pages.supplies.liters")}{" "}
@@ -88,7 +88,7 @@ const Supplies = () => {
                     </span>
                     {item.km_driven ? (
                       <KmDriven>
-                        {item.km_driven} {t("pages.supplies.average_km_driven")}
+                        {item.km_driven / item.liters} {t("pages.supplies.average_km_driven")}
                       </KmDriven>
                     ) : (
                       <KmDrivenOpen>

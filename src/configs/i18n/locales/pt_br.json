@@ -56,7 +56,10 @@
       "error_input_message_fuel": "Por favor, escolha um combustível.",
       "placeholder_liters": "Qntd. de Litros",
       "error_input_message_liters": "Por favor, insira uma quantidade de litros.",
-      "placeholder_km": "Km's rodados"
+      "placeholder_km": "Km's rodados",
+      "fuel_gasoline": "Gasolina",
+      "fuel_alcohol": "Álcool",
+      "fuel_diesel": "Díesel"
     }
   }
 }

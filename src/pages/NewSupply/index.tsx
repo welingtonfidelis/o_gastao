@@ -38,17 +38,17 @@ const NewSupply = () => {
   }, [id, t]);
 
   const handleSave = async (e: any) => {
-    e.date = moment(e.date).format('YYYY/MM/DD hh:mm:ss');
+    // e.date = moment(e.date).format('YYYY/MM/DD hh:mm:ss');
+    e.date = moment(e.date).unix();
 
     let response: any;
-    if(id) {
+    if (id) {
       response = await updateSupply({ id: +id, ...e });
-    }
-    else {
+    } else {
       response = await addSupply(e);
     }
 
-    if(response) navigate(-1);
+    if (response) navigate(-1);
   };
 
   const getListVehicles = async () => {
@@ -65,7 +65,12 @@ const NewSupply = () => {
     const fuels = await listFuels();
 
     if (fuels) {
-      setFuelsList(fuels.map((item) => ({ value: item.id, label: item.name })));
+      setFuelsList(
+        fuels.map((item) => ({
+          value: item.id,
+          label: t(`pages.new_supply.fuel_${item.name}`),
+        }))
+      );
     }
   };
 
@@ -73,7 +78,7 @@ const NewSupply = () => {
     const [selected] = (await findSupplyById(+id!)) || [];
 
     if (selected) {
-      const date = moment(selected.date);
+      const date = moment(new Date(selected.date * 1000));
       form.setFieldsValue({ ...selected, date });
     }
   };

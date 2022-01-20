@@ -13,7 +13,7 @@ export class DB extends Dexie {
     this.version(1).stores({
       fuels: '++id, name',
       vehicles: '++id, name',
-      supplies: '++id, vehicle_id, fuel_id',
+      supplies: '++id, vehicle_id, fuel_id, km_driven, date',
     });
   }
 }

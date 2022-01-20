@@ -1,4 +1,8 @@
-import { Supply, SupplyWithRelations } from "../../interface/supply";
+import {
+  ListAllSuppliesFilters,
+  Supply,
+  SupplyWithRelations,
+} from "../../interface/supply";
 import { localDB, DB } from "./db";
 
 class SupplyDB {
@@ -8,31 +12,54 @@ class SupplyDB {
     this.db = localDB;
   }
 
-  async findAll(): Promise<SupplyWithRelations[]> {
-    const supplies: Supply[] = await this.db.supplies.toArray();
+  async findAll(
+    filters?: ListAllSuppliesFilters
+  ): Promise<SupplyWithRelations[]> {
+    let filterFunction = (item: Supply) => true;
+    
+    if (
+      filters?.filterBy?.openSupplies ||
+      filters?.filterBy?.openSupplies !== undefined
+    ) {
+      filterFunction = (item: Supply) =>
+        filters?.filterBy?.openSupplies
+          ? item.km_driven === undefined
+          : item.km_driven !== undefined;
+    }
+
+    const supplies: Supply[] = await this.db.supplies
+      .reverse()
+      .filter(filterFunction)
+      .sortBy(filters?.orderBy || "");
 
     const suppliesWithRelations = [];
-    for(let i = 0; i < supplies.length; i += 1) {
+    for (let i = 0; i < supplies.length; i += 1) {
       const item = supplies[i];
-      const [vehicle] = await this.db.vehicles.where('id').equals(item.vehicle_id).toArray();
-      const [fuel] = await this.db.fuels.where('id').equals(item.fuel_id).toArray();
+      const [vehicle] = await this.db.vehicles
+        .where("id")
+        .equals(item.vehicle_id)
+        .toArray();
+      const [fuel] = await this.db.fuels
+        .where("id")
+        .equals(item.fuel_id)
+        .toArray();
 
       suppliesWithRelations.push({
         ...item,
         vehicle,
-        fuel
-      })
+        fuel,
+      });
     }
 
     return suppliesWithRelations;
   }
 
   findById(id: number) {
-    return this.db.supplies.where('id').equals(id).toArray();
+    return this.db.supplies.where("id").equals(id).toArray();
   }
 
   add(data: Supply) {
-    return this.db.supplies.add(data); 
+    return this.db.supplies.add(data);
   }
 
   update(data: Supply) {

@@ -3,10 +3,10 @@ import { Vehicle } from "./vehicle";
 
 export interface Supply {
   id?: number;
-  date: Date;
+  date: number;
   value: number;
   liters: number;
-  km_driven?:number;
+  km_driven?: number;
   fuel_id: number;
   vehicle_id: number;
 }
@@ -14,4 +14,11 @@ export interface Supply {
 export interface SupplyWithRelations extends Supply {
   vehicle: Vehicle;
   fuel: Fuel;
+}
+
+export interface ListAllSuppliesFilters {
+  orderBy?: "date" | "km_driven";
+  filterBy?: {
+    openSupplies: boolean;
+  };
 }

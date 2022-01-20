@@ -17,7 +17,7 @@ const Select: React.FC<SelectProps> = (props) => {
     >
       {props.options.map((item, index) => {
         return (
-          <SelectAntd.Option value={item.value}>{item.label}</SelectAntd.Option>
+          <SelectAntd.Option key={index} value={item.value}>{item.label}</SelectAntd.Option>
         );
       })}
     </SelectAntd>
