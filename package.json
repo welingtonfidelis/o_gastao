@@ -2,6 +2,7 @@
   "name": "o_gastao",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://welingtonfidelis.github.io/o_gastao/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
@@ -29,7 +30,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "antd:make:css": "npx lessc ./src/styles/main.less ./src/styles/css/antd.css --js"
+    "antd:make:css": "npx lessc ./src/styles/main.less ./src/styles/css/antd.css --js",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -51,6 +54,7 @@
   },
   "devDependencies": {
     "@types/styled-components": "^5.1.20",
-    "less": "^4.1.2"
+    "less": "^4.1.2",
+    "gh-pages": "^3.2.3"
   }
 }
