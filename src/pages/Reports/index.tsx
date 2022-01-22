@@ -4,7 +4,7 @@ const Reports = () => {
   return (
     <>
       <Container>
-        <div>Reports page</div>
+        <div>Reports page </div>
       </Container>
     </>
   );
