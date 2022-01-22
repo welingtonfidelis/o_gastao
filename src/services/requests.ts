@@ -4,7 +4,7 @@ import i18n from "i18next";
 import { Vehicle } from "../interface/vehicle";
 import { vehicleDB } from "./repositories/vehicles";
 import { fuelDB } from "./repositories/fuels";
-import { ListAllSuppliesFilters, Supply } from "../interface/supply";
+import { ListAllSuppliesByVehicleFilters, ListAllSuppliesFilters, Supply } from "../interface/supply";
 import { supplyDB } from "./repositories/supplies";
 
 
@@ -89,6 +89,17 @@ export const listFuels = async () => {
 export const listSupplies = async (filters?: ListAllSuppliesFilters) => {
   try {
     const response = await supplyDB.findAll(filters);
+    return response;
+  } catch (error) {
+    const message = i18n.t("general.message_error");
+    toast.error(message, { autoClose: false });
+    console.log(message, error);
+  }
+};
+
+export const listSuppliesByVehicle = async (filters: ListAllSuppliesByVehicleFilters) => {
+  try {
+    const response = await supplyDB.findAllByVehicle(filters);
     return response;
   } catch (error) {
     const message = i18n.t("general.message_error");

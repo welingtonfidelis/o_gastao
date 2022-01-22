@@ -1,88 +1,89 @@
 import ItemCard from "../../components/ItemCard";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 import { maskDate, maskValue } from "../../util";
 import {
   CardListContainer,
   CardListItems,
   CardOpenSupplyComponent,
+  CardLastSupplyContainer,
   Container,
+  AverageKmDrivenTotal,
+  CardLeftContent,
+  CardLastSupplyComponent,
+  CardRightContent,
 } from "./styled";
+import { useEffect, useState } from "react";
+import {
+  listSupplies,
+  listSuppliesByVehicle,
+  listVehicles,
+} from "../../services/requests";
+import {
+  SupplyByVehicleWithRelations,
+  SupplyWithRelations,
+} from "../../interface/supply";
 
 const Home = () => {
+  const [openSupplies, setOpenSupplies] = useState<SupplyWithRelations[]>([]);
+  const [lastSupplies, setLastSupplies] = useState<
+    SupplyByVehicleWithRelations[]
+  >([]);
+  const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const openSuplies = [
-    {
-      id: 99,
-      car: {
-        name: "Gol Vermelho",
-      },
-      supply: {
-        date: "2022/01/15 00:00:00",
-        value: 130.0,
-        liters: 15,
-        fuel_type: "Gasolina",
-      },
-    },
-  ];
+  useEffect(() => {
+    getListSupplies();
+  }, []);
 
-  const lastSuplies = [
-    {
-      id: 1,
-      car: {
-        name: "Gol Vermelho",
-      },
-      supply: {
-        date: "2022/01/01 00:00:00",
-        value: 130.0,
-        liters: 15,
-        fuel_type: "Gasolina",
-        km_driven: 112.0,
-      },
-      average_km_driven: 7.0,
-    },
-    {
-      id: 2,
-      car: {
-        name: "Cg 150",
-      },
-      supply: {
-        date: "2021/12/10 00:00:00",
-        value: 50.0,
-        liters: 10,
-        fuel_type: "Gasolina",
-        km_driven: 220.0,
-      },
-      average_km_driven: 22.0,
-    },
-  ];
+  const getListSupplies = async () => {
+    const openList = await listSupplies({
+      orderBy: "date",
+      filterBy: { openSupplies: true },
+    });
+
+    if (openList && openList.length) setOpenSupplies(openList);
+
+    const vehicles = await listVehicles();
+
+    if (vehicles && vehicles.length) {
+      const vehiclesId = vehicles.map((item) => item.id) as number[];
+      const supplyList = await listSuppliesByVehicle({
+        vehiclesId,
+        filterBy: { openSupplies: false },
+        limit: 3,
+      });
+      if (supplyList && supplyList.length) setLastSupplies(supplyList);
+    }
+  };
 
   const handleEditSupply = (id: number) => {
-    console.log("EDIT SUPPLY", id);
+    navigate(`/edit-supply/${id}`);
   };
 
   return (
     <Container>
       <CardListContainer>
-        <h3>{t('pages.home.open_supplies')}</h3>
+        <h3>{t("pages.home.open_supplies")}</h3>
 
         <CardListItems>
-          {openSuplies.map((item, index) => {
+          {openSupplies.map((item, index) => {
             return (
               <ItemCard
                 key={index}
-                title={maskDate(new Date(item.supply.date))}
+                title={maskDate(new Date(item.date * 1000))}
                 editAction={() => {
-                  handleEditSupply(item.id);
+                  handleEditSupply(item.id!);
                 }}
               >
                 <CardOpenSupplyComponent>
-                  <strong>{item.car.name}</strong>
+                  <span>{item.vehicle.name}</span>
                   <span>
-                    {item.supply.liters} lts {item.supply.fuel_type}
+                    {item.liters} {t("pages.supplies.liters")}{" "}
+                    {t(`pages.supplies.fuel_${item.fuel.name}`)}
                   </span>
-                  <span>{maskValue(item.supply.value)}</span>
+                  <span>{maskValue(item.value)}</span>
                 </CardOpenSupplyComponent>
               </ItemCard>
             );
@@ -91,23 +92,43 @@ const Home = () => {
       </CardListContainer>
 
       <CardListContainer>
-        <h3>{t('pages.home.last_supplies')}</h3>
+        <h3>{t("pages.home.last_supplies")}</h3>
 
         <CardListItems>
-          {lastSuplies.map((item, index) => {
+          {lastSupplies.map((item, index) => {
+            let average_km_driven_total = 0;
             return (
-              <ItemCard
-                key={index}
-                title={item.car.name}
-              >
-                <CardOpenSupplyComponent>
-                  <strong>{maskDate(new Date(item.supply.date))}</strong>
-                  <span>
-                    {item.supply.liters} lts {item.supply.fuel_type}
-                  </span>
-                  <span>{maskValue(item.supply.value)}</span>
-                  <span><strong>{item.average_km_driven}km/l</strong> de média</span>
-                </CardOpenSupplyComponent>
+              <ItemCard key={index} title={item.vehicle.name}>
+                <CardLastSupplyContainer>
+                  {item.supplies.map((subItem, subIndex) => {
+                    average_km_driven_total += subItem.average_km_driven || 0;
+
+                    return (
+                      <CardLastSupplyComponent key={subIndex}>
+                        <CardLeftContent>
+                          <span>{maskDate(new Date(subItem.date * 1000))}</span>
+                          <span>{maskValue(subItem.value)}</span>
+                          <span>
+                            {subItem.liters} {t("pages.supplies.liters")}{" "}
+                            {t(`pages.supplies.fuel_${subItem.fuel.name}`)}
+                          </span>
+                        </CardLeftContent>
+                        <CardRightContent>
+                          <span>{subItem.km_driven} {t('pages.home.km_driven')}</span>
+                          <span>{subItem.average_km_driven} {t('pages.home.average_km_driven')}</span>
+                        </CardRightContent>
+                      </CardLastSupplyComponent>
+                    );
+                  })}
+                  <AverageKmDrivenTotal>
+                    <span>
+                      {(
+                        average_km_driven_total / item.supplies.length
+                      ).toPrecision(3)}{" "}
+                      {t("pages.home.average_km_driven_total")}
+                    </span>
+                  </AverageKmDrivenTotal>
+                </CardLastSupplyContainer>
               </ItemCard>
             );
           })}

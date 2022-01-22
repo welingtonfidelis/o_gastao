@@ -22,7 +22,10 @@
   "pages": {
     "home": {
       "open_supplies": "Abastecimentos em aberto",
-      "last_supplies": "Últimos abastecimentos"
+      "last_supplies": "Últimos abastecimentos",
+      "km_driven": "km's rodados",
+      "average_km_driven": "km/l de média",
+      "average_km_driven_total": "km/l de média total"
     },
     "vehicles": {
       "title_vehicles": "Seus veículos cadastrados"
@@ -36,7 +39,7 @@
     "supplies": {
       "title_supplies": "Seus abastecimentos cadastrados",
       "liters": "litros",
-      "km_driven": "Km's rodados",
+      "km_driven": "km's rodados",
       "average_km_driven": "km/l de média",
       "open_supply": "Não finalizado",
       "fuel_gasoline": "de gasolina",

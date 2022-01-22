@@ -9,6 +9,7 @@ export interface Supply {
   km_driven?: number;
   fuel_id: number;
   vehicle_id: number;
+  average_km_driven?: number
 }
 
 export interface SupplyWithRelations extends Supply {
@@ -16,9 +17,23 @@ export interface SupplyWithRelations extends Supply {
   fuel: Fuel;
 }
 
+export interface SupplyByVehicleWithRelations {
+  vehicle: Vehicle;
+  supplies: Omit<SupplyWithRelations, 'vehicle'>[];
+}
+
 export interface ListAllSuppliesFilters {
   orderBy?: "date" | "km_driven";
   filterBy?: {
-    openSupplies: boolean;
+    openSupplies?: boolean;
+  };
+}
+
+export interface ListAllSuppliesByVehicleFilters {
+  vehiclesId: number[];
+  orderBy?: "date";
+  limit?: number;
+  filterBy?: {
+    openSupplies?: boolean;
   };
 }

@@ -88,7 +88,7 @@ const Supplies = () => {
                     </span>
                     {item.km_driven ? (
                       <KmDriven>
-                        {item.km_driven / item.liters} {t("pages.supplies.average_km_driven")}
+                        {item.average_km_driven} {t("pages.supplies.average_km_driven")}
                       </KmDriven>
                     ) : (
                       <KmDrivenOpen>
