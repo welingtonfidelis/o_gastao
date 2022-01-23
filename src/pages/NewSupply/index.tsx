@@ -1,5 +1,5 @@
 import { Form } from "antd";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
@@ -26,6 +26,28 @@ const NewSupply = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
+  const getListFuels = useCallback(async () => {
+    const fuels = await listFuels();
+
+    if (fuels) {
+      setFuelsList(
+        fuels.map((item) => ({
+          value: item.id,
+          label: t(`pages.new_supply.fuel_${item.name}`),
+        }))
+      );
+    }
+  }, [t]);
+
+  const getSupplyById = useCallback(async () => {
+    const [selected] = (await findSupplyById(+id!)) || [];
+
+    if (selected) {
+      const date = moment(new Date(selected.date * 1000));
+      form.setFieldsValue({ ...selected, date });
+    }
+  }, [form, id]);
+
   useEffect(() => {
     setPageTitle(t("pages.new_supply.title_new_supply"));
 
@@ -35,7 +57,7 @@ const NewSupply = () => {
       setPageTitle(t("pages.new_supply.title_edit_vehicle"));
       getSupplyById();
     }
-  }, [id, t]);
+  }, [getListFuels, getSupplyById, id, t]);
 
   const handleSave = async (e: any) => {
     // e.date = moment(e.date).format('YYYY/MM/DD hh:mm:ss');
@@ -58,28 +80,6 @@ const NewSupply = () => {
       setVehiclesList(
         vehicles.map((item) => ({ value: item.id, label: item.name }))
       );
-    }
-  };
-
-  const getListFuels = async () => {
-    const fuels = await listFuels();
-
-    if (fuels) {
-      setFuelsList(
-        fuels.map((item) => ({
-          value: item.id,
-          label: t(`pages.new_supply.fuel_${item.name}`),
-        }))
-      );
-    }
-  };
-
-  const getSupplyById = async () => {
-    const [selected] = (await findSupplyById(+id!)) || [];
-
-    if (selected) {
-      const date = moment(new Date(selected.date * 1000));
-      form.setFieldsValue({ ...selected, date });
     }
   };
 

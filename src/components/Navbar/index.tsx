@@ -19,7 +19,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const urlPath = window.location.pathname;
-    const [_, page] = urlPath.split('/');
+    const page = (urlPath.split('/'))[1];
     setSelectedOption(`/${page}`);
   }, []);
 
