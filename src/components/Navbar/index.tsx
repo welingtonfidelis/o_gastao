@@ -18,9 +18,9 @@ const Navbar = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    const urlPath = window.location.pathname;
-    const page = (urlPath.split('/'))[1];
-    setSelectedOption(`/${page}`);
+    const urlPath = window.location.hash;
+    const page = (urlPath.split('#'))[1];
+    setSelectedOption(page);
   }, []);
 
   const navbarOptions = [

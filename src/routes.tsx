@@ -1,5 +1,5 @@
-import { Routes, Route } from "react-router-dom";
-import { ToastContainer } from 'react-toastify';
+import { Routes, Route, HashRouter } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
 import Vehicles from "./pages/Vehicles";
@@ -83,16 +83,18 @@ const AppRoutes = () => {
   return (
     <>
       <ToastContainer />
-      <Routes>
-        {allRoutes.map((item, index) =>
-          routeWrapper(
-            index + "",
-            item.path,
-            item.element,
-            item.renderExtraComponents
-          )
-        )}
-      </Routes>
+      <HashRouter>
+        <Routes>
+          {allRoutes.map((item, index) =>
+            routeWrapper(
+              index + "",
+              item.path,
+              item.element,
+              item.renderExtraComponents
+            )
+          )}
+        </Routes>
+      </HashRouter>
     </>
   );
 };
