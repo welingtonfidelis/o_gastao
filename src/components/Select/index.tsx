@@ -2,7 +2,7 @@ import { Select as SelectAntd, SelectProps as SelectAntdProps } from "antd";
 
 interface SelectProps extends SelectAntdProps {
   options: {
-    value: number;
+    value: number | string;
     label: string;
   }[];
 }

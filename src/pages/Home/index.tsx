@@ -27,9 +27,7 @@ import {
 
 const Home = () => {
   const [openSupplies, setOpenSupplies] = useState<SupplyWithRelations[]>([]);
-  const [lastSupplies, setLastSupplies] = useState<
-    SupplyByVehicleWithRelations[]
-  >([]);
+  const [lastSupplies, setLastSupplies] = useState<SupplyByVehicleWithRelations[]>([]);
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -97,7 +95,9 @@ const Home = () => {
         <CardListItems>
           {lastSupplies.map((item, index) => {
             let average_km_driven_total = 0;
-            return (
+            return !item.supplies.length ? (
+              <></>
+            ) : (
               <ItemCard key={index} title={item.vehicle.name}>
                 <CardLastSupplyContainer>
                   {item.supplies.map((subItem, subIndex) => {
@@ -114,8 +114,13 @@ const Home = () => {
                           </span>
                         </CardLeftContent>
                         <CardRightContent>
-                          <span>{subItem.km_driven} {t('pages.home.km_driven')}</span>
-                          <span>{subItem.average_km_driven} {t('pages.home.average_km_driven')}</span>
+                          <span>
+                            {subItem.km_driven} {t("pages.home.km_driven")}
+                          </span>
+                          <span>
+                            {subItem.average_km_driven}{" "}
+                            {t("pages.home.average_km_driven")}
+                          </span>
                         </CardRightContent>
                       </CardLastSupplyComponent>
                     );

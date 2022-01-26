@@ -27,6 +27,7 @@ export const CardListContainer = styled.div`
 
   button {
     flex: 1;
+    max-width: 150px;
   }
 `;
 

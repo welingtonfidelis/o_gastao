@@ -1,3 +1,4 @@
+import { t } from 'i18next';
 import { FaArrowLeft } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { PrimaryButton, SecondaryButton } from '../Button';
@@ -26,8 +27,8 @@ const EditItemPage: React.FC<Props> = ({ title, onSave, children }) => {
       <MainContent>{children}</MainContent>
 
       <Footer>
-        <SecondaryButton onClick={handleClosePage}>Cancelar</SecondaryButton>
-        <PrimaryButton onClick={onSave} >Salvar</PrimaryButton>
+        <SecondaryButton onClick={handleClosePage}>{t('general.button_save')}</SecondaryButton>
+        <PrimaryButton onClick={onSave} >{t('general.button_save')}</PrimaryButton>
       </Footer>
     </Container>
   );

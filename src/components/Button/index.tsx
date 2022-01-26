@@ -8,7 +8,7 @@ const PrimaryButton: React.FC<Props> = (props) => {
       type="primary"
       size="large"
       {...props}
-      style={{ textTransform: "uppercase", width: "100%", maxWidth: '100px' , borderRadius: "4px" }}
+      style={{ textTransform: "uppercase", width: "100%", borderRadius: "4px" }}
     >
       {props.children}
     </Button>

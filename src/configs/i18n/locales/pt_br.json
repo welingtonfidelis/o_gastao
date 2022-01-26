@@ -1,6 +1,8 @@
 {
   "general": {
     "button_new": "Novo",
+    "button_save": "Salvar",
+    "button_cancel": "Cancelar",
     "message_success": "Sucesso ao executar sua requisição!",
     "message_error": "Houve um erro ao executar sua requisição. Por favor, tente novamente.",
     "delete_confirm_title": "Deseja excluir este dado?",
@@ -63,6 +65,13 @@
       "fuel_gasoline": "Gasolina",
       "fuel_alcohol": "Álcool",
       "fuel_diesel": "Díesel"
+    },
+    "reports": {
+      "placeholder_vehicle": "Veículo",
+      "error_input_message_vehicle": "Por favor, escolha um veículo.",
+      "placeholder_limit": "Quantidade de abastecimentos",
+      "error_input_message_limit": "Por favor, escolha a quantidade de abastecimentos.",
+      "button_generate_report": "Gerar Relatório"
     }
   }
 }
