@@ -83,6 +83,10 @@
       "fuel_alcohol": "de álcool",
       "fuel_diesel": "de díesel",
       "no_supplies": "Nenhum abastecimento registrado"
+    },
+    "informations": {
+      "description": "é seu companheiro na hora de saber como seu veículo tem gasto combustível, não deixe de registrar seus abastencimentos com frequência.",
+      "thank_message": "Obrigado por usar este projeto 😃"
     }
   }
 }

@@ -112,7 +112,12 @@ const NewSupply = () => {
           >
             <DatePicker placeholder={t("pages.new_supply.placeholder_date")} />
           </Form.Item>
-          <Form.Item name="value" rules={[]}>
+          <Form.Item name="value" rules={[
+            {
+              required: true,
+              message: t("pages.new_supply.error_input_message_value")
+            }
+          ]}>
             <InputText
               placeholder={t("pages.new_supply.placeholder_value")}
               type="number"

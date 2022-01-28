@@ -27,7 +27,7 @@ const EditItemPage: React.FC<Props> = ({ title, onSave, children }) => {
       <MainContent>{children}</MainContent>
 
       <Footer>
-        <SecondaryButton onClick={handleClosePage}>{t('general.button_save')}</SecondaryButton>
+        <SecondaryButton onClick={handleClosePage}>{t('general.button_cancel')}</SecondaryButton>
         <PrimaryButton onClick={onSave} >{t('general.button_save')}</PrimaryButton>
       </Footer>
     </Container>
