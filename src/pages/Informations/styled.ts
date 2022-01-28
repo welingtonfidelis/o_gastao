@@ -4,6 +4,7 @@ export const Container = styled.div`
   display: flex;
   height: calc(100% - (var(--navgar-mobile-height) + var(--header-mobile-height)));
   align-items: center;
+  justify-content: center;
 
   @media (min-width: 800px) {
     margin-top: var(--navbar-height);

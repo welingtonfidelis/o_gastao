@@ -86,7 +86,8 @@
     },
     "informations": {
       "description": "é seu companheiro na hora de saber como seu veículo tem gasto combustível, não deixe de registrar seus abastencimentos com frequência.",
-      "thank_message": "Obrigado por usar este projeto 😃"
+      "thank_message": "Obrigado por usar este projeto 😃",
+      "image_car_alt": "Gif de carro 1"
     }
   }
 }

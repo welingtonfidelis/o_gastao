@@ -7,7 +7,7 @@ const Informations = () => {
     <>
       <Container>
         <MainContent>
-          <img src={gifUrl} width={200} />
+          <img src={gifUrl} width={200} alt={t("pages.informations.image_car_alt")}/>
           <span>
             <strong>{t("general.browser_tab_title")}</strong> {t("pages.informations.description")}
           </span>
