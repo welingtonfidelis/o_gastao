@@ -1,5 +1,6 @@
 {
   "general": {
+    "browser_tab_title": "O Gastão",
     "button_new": "Novo",
     "button_save": "Salvar",
     "button_cancel": "Cancelar",
@@ -71,7 +72,17 @@
       "error_input_message_vehicle": "Por favor, escolha um veículo.",
       "placeholder_limit": "Quantidade de abastecimentos",
       "error_input_message_limit": "Por favor, escolha a quantidade de abastecimentos.",
-      "button_generate_report": "Gerar Relatório"
+      "button_generate_report": "Gerar Relatório",
+      "km_driven": "km's rodados",
+      "average_km_driven": "km/l de média",
+      "average_km": "km/l",
+      "liters": "litros",
+      "max_average": "Maior média",
+      "min_average": "Menor média",
+      "fuel_gasoline": "de gasolina",
+      "fuel_alcohol": "de álcool",
+      "fuel_diesel": "de díesel",
+      "no_supplies": "Nenhum abastecimento registrado"
     }
   }
 }

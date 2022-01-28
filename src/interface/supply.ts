@@ -17,6 +17,10 @@ export interface SupplyWithRelations extends Supply {
   fuel: Fuel;
 }
 
+export interface SupplyWithFuelRelation extends Supply {
+  fuel: Fuel;
+}
+
 export interface SupplyByVehicleWithRelations {
   vehicle: Vehicle;
   supplies: Omit<SupplyWithRelations, 'vehicle'>[];
