@@ -7,7 +7,7 @@ export const Container = styled.div`
   height: 50px;
   position: fixed;
   bottom: 12px;
-  background: #E5E5E5;
+  background: var(--navbar-background-color);
   border-radius: 4px;
   padding: 2px;
   
@@ -15,7 +15,8 @@ export const Container = styled.div`
     justify-content: center;
     width: 100%;
     margin-top: 8px;
-    background: #E5E5E5;
+    background: var(--navbar-background-color);
+    color: var(--text-2-color);
 
     li.ant-menu-item {
       & svg {
@@ -30,8 +31,9 @@ export const Container = styled.div`
   }
 
   @media (min-width: 800px) {
-    top: 50px;
+    top: 60px;
     border-top: none;
+    max-width: 976px;
 
     ul {
       margin-bottom: 8px;

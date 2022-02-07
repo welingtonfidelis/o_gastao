@@ -9,7 +9,7 @@ export const Container = styled.div`
   & svg {
     font-size: 1.6rem;
     margin-left: 8px;
-    color: var(--contrast-1-color);
+    color: var(--navbar-background-color);
   }
 `;
 

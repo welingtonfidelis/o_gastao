@@ -20,7 +20,8 @@ const Navbar = () => {
   useEffect(() => {
     const urlPath = window.location.hash;
     const page = (urlPath.split('#'))[1];
-    setSelectedOption(page);
+    
+    setSelectedOption(page || '/');
   }, []);
 
   const navbarOptions = [
