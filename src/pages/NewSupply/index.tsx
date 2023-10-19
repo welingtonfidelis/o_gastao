@@ -17,6 +17,7 @@ import { Select } from "../../components/Select";
 import { DatePicker } from "../../components/DatePicker";
 import moment from "moment";
 import { SelectOption } from "../../interface/select";
+import { InputTextArea } from "../../components/TextArea";
 
 const NewSupply = () => {
   const { t } = useTranslation();
@@ -112,12 +113,15 @@ const NewSupply = () => {
           >
             <DatePicker placeholder={t("pages.new_supply.placeholder_date")} />
           </Form.Item>
-          <Form.Item name="value" rules={[
-            {
-              required: true,
-              message: t("pages.new_supply.error_input_message_value")
-            }
-          ]}>
+          <Form.Item
+            name="value"
+            rules={[
+              {
+                required: true,
+                message: t("pages.new_supply.error_input_message_value"),
+              },
+            ]}
+          >
             <InputText
               placeholder={t("pages.new_supply.placeholder_value")}
               type="number"
@@ -155,6 +159,12 @@ const NewSupply = () => {
             <InputText
               placeholder={t("pages.new_supply.placeholder_km")}
               type="number"
+            />
+          </Form.Item>
+          <Form.Item name="observation" rules={[]}>
+            <InputTextArea
+              placeholder={t("pages.new_supply.placeholder_observation")}
+              rows={5}
             />
           </Form.Item>
         </Form>

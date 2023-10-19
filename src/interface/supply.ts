@@ -9,7 +9,8 @@ export interface Supply {
   km_driven?: number;
   fuel_id: number;
   vehicle_id: number;
-  average_km_driven?: number
+  average_km_driven?: number;
+  observation?: string;
 }
 
 export interface SupplyWithRelations extends Supply {

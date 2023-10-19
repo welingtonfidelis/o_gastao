@@ -56,9 +56,11 @@ class SupplyDB {
 
       for (let i = 0; i < supplies.length; i += 1) {
         const item = supplies[i];
-        
-        item.average_km_driven = +((item.km_driven || 0) / item.liters).toPrecision(3);
-        
+
+        item.average_km_driven = +(
+          (item.km_driven || 0) / item.liters
+        ).toPrecision(3);
+
         const [vehicle] = await this.db.vehicles
           .where("id")
           .equals(item.vehicle_id)
@@ -108,11 +110,12 @@ class SupplyDB {
           .filter(filterFunction)
           .toArray();
 
-        
         for (let j = 0; j < supplies.length; j += 1) {
           const subItem = supplies[j];
-          
-          subItem.average_km_driven = +((subItem.km_driven || 0) / subItem.liters).toPrecision(3);
+
+          subItem.average_km_driven = +(
+            (subItem.km_driven || 0) / subItem.liters
+          ).toPrecision(3);
           supplyWithFuel.push({ ...subItem, fuel: fuels[subItem.fuel_id] });
         }
 
